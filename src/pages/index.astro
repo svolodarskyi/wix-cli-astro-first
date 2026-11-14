@@ -1,0 +1,1205 @@
+---
+import SiteLayout from "../layouts/IssaLayout.astro";
+---
+
+<SiteLayout title="Organic Japanese Tea | Issa Green" description="Organic Japanese tea from independent farmers, from Calgary.">
+<!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+
+    <!-- Signature element: Japanese character for "Issa" (一茶) -->
+    <div class="hero-kanji" aria-hidden="true">一茶</div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">True Organic</p>
+      <h1 class="hero-title">
+        Directly<br>from Farmers
+      </h1>
+      <p class="hero-subtitle">Japanese ceremonial &amp; everyday tea</p>
+      <a href="/tea-selection" class="hero-cta">
+        Explore our selection
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="scroll-hint-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- OUR STORY -->
+  <section class="story-section">
+    <div class="section-wrap">
+      <p class="section-label reveal">Our Story</p>
+      <div class="story-grid">
+        <div class="story-img-wrap reveal">
+          <img
+            src="/images/home/img-2.jpg"
+            alt="Issa Green — matcha set with whisk and bowl"
+            onerror="this.closest('.story-img-wrap').style.background='#c8d4c0';this.style.display='none'"
+          >
+        </div>
+        <div class="story-text reveal reveal-delay-1">
+          <h2>
+            <span>Calgary Based</span>
+            A Japanese Organic<br>Tea Brand
+          </h2>
+          <div class="story-rule"></div>
+          <p>
+            ISSA GREEN was founded by Kazuki Nomura, a Japanese fabric designer who moved to Canada and started this business to promote sustainability, organic-based products and connecting independent farmers with consumers willing to try healthy and tasty Japanese tea.
+          </p>
+          <a href="/our-story" class="story-link">
+            Full Story
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEA SELECTION -->
+  <section class="tea-section">
+    <div class="section-wrap" style="padding-bottom:0;">
+      <div class="tea-section-head reveal">
+        <h2>Tea Selection</h2>
+        <p>Direct from small family farms in Japan</p>
+      </div>
+    </div>
+
+    <!-- Carousel -->
+    <div class="tea-reel" id="teaReel">
+      <div class="tea-belt" id="teaBelt">
+        <div class="tc">
+          <img class="tc-img" src="/images/home/img-3.jpg" alt="Matcha" draggable="false">
+        </div>
+        <div class="tc">
+          <img class="tc-img" src="/images/home/img-4.jpg" alt="Houjicha" draggable="false">
+        </div>
+        <div class="tc">
+          <img class="tc-img" src="/images/home/img-5.jpg" alt="Fukamushi Genmaicha" draggable="false">
+        </div>
+        <div class="tc">
+          <img class="tc-img" src="/images/home/img-6.jpg" alt="Sencha" draggable="false">
+        </div>
+        <div class="tc">
+          <img class="tc-img" src="/images/home/img-7.jpg" alt="Kabusecha" draggable="false">
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav: arrows + dots -->
+    <div class="section-wrap" style="padding-top:0; padding-bottom:var(--section-v); text-align:center;">
+      <div class="tea-nav-row reveal">
+        <button class="tc-arrow" id="tcPrev" aria-label="Previous">
+          <svg viewBox="0 0 48 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="44" y1="9" x2="6" y2="9"/>
+            <polyline points="14,2 5,9 14,16"/>
+            <line x1="2" y1="9" x2="6" y2="9"/>
+          </svg>
+        </button>
+        <button class="tc-dot active" data-i="0" aria-label="Matcha"></button>
+        <button class="tc-dot" data-i="1" aria-label="Houjicha"></button>
+        <button class="tc-dot" data-i="2" aria-label="Fukamushi Genmaicha"></button>
+        <button class="tc-dot" data-i="3" aria-label="Sencha"></button>
+        <button class="tc-dot" data-i="4" aria-label="Kabusecha"></button>
+        <button class="tc-arrow" id="tcNext" aria-label="Next">
+          <svg viewBox="0 0 48 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="9" x2="42" y2="9"/>
+            <polyline points="34,2 43,9 34,16"/>
+            <line x1="42" y1="9" x2="46" y2="9"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="tea-info reveal reveal-delay-1" id="teaInfo">
+        <p class="tea-info-name" id="teaName">MATCHA</p>
+        <p class="tea-info-desc" id="teaDesc">Vibrant, stone-ground ceremonial tea rich in umami, with a smooth depth and naturally sweet finish.</p>
+      </div>
+
+      <a href="/tea-selection" class="btn-explore reveal">Explore</a>
+    </div>
+  </section>
+
+
+  <!-- FARMERS -->
+  <section class="farmers-section">
+    <div class="section-wrap">
+      <div class="farmers-grid">
+        <div class="farmers-text reveal">
+          <p class="section-label" style="margin-bottom:32px;">Our Farmers</p>
+          <h2>Small family farms.<br>Big terroir.</h2>
+          <div class="farmers-rule" style="margin-top:28px;"></div>
+          <p class="lead">We are proud to work exclusively with small family tea farms.</p>
+          <p class="body">
+            The terroir they have cultivated and their unique farming philosophies are clearly expressed in the flavor of their teas. Every cup carries the story of the land and the hands that tended it.
+          </p>
+          <a href="/farmers" class="story-link" style="margin-top:32px;">
+            Discover our farmers
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="farmers-img-wrap reveal reveal-delay-1">
+          <img
+            src="/images/home/img-8.jpg"
+            alt="Hands holding freshly picked tea leaves"
+            onerror="this.style.background='#c8d4c0';this.style.display='none'"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIND US HERE -->
+  <section class="findus-section">
+    <div class="section-wrap">
+      <p class="section-label reveal">Find Us Here</p>
+      <div class="findus-grid">
+
+        <!-- Instagram -->
+        <div class="ig-col reveal">
+          <p class="ig-heading">Follow us on Instagram</p>
+          <p class="ig-handle">@issagreentea</p>
+          <div class="ig-mosaic">
+            <div class="ig-tile"></div>
+            <div class="ig-tile"></div>
+            <div class="ig-tile"></div>
+            <div class="ig-tile"></div>
+            <div class="ig-tile"></div>
+            <div class="ig-tile"></div>
+          </div>
+          <button class="ig-load-btn">Load more</button>
+        </div>
+
+        <!-- Events -->
+        <div class="events-col reveal reveal-delay-1">
+          <p class="events-season">2026 Spring &amp; Summer Events</p>
+
+          <p class="events-month">May</p>
+          <div class="event-row">
+            <span class="event-date">23 Sat</span>
+            <span class="event-name">Farmers Makers Market at CSpace<br>Minoru Ueda Exhibition (Reception)</span>
+          </div>
+
+          <p class="events-month">June</p>
+          <div class="event-row">
+            <span class="event-date">7 Sun</span>
+            <span class="event-name">Lilac Festival — at Carino booth</span>
+          </div>
+          <div class="event-row">
+            <span class="event-date">13 Sat</span>
+            <span class="event-name">Matcha Experience at Minoru Ueda Exhibition</span>
+          </div>
+          <div class="event-row">
+            <span class="event-date">18 Thu</span>
+            <span class="event-name">Bridgeland Farmers Market</span>
+          </div>
+          <div class="event-row">
+            <span class="event-date">20 Sat</span>
+            <span class="event-name">Farmers Makers Market at CSpace</span>
+          </div>
+          <div class="event-row">
+            <span class="event-date">21 Sun</span>
+            <span class="event-name">Minoru Ueda Backyard Exhibition</span>
+          </div>
+
+          <p class="events-month">July</p>
+          <div class="event-row">
+            <span class="event-date">10 Fri</span>
+            <span class="event-name">Evening with Japanese Tea at CSpace</span>
+          </div>
+          <div class="event-row">
+            <span class="event-date">16 Thu</span>
+            <span class="event-name">Bridgeland Farmers Market</span>
+          </div>
+          <div class="event-row">
+            <span class="event-date">18 Sat</span>
+            <span class="event-name">Farmers Makers Market</span>
+          </div>
+
+          <p class="events-month">August</p>
+          <div class="event-row">
+            <span class="event-date">27 Thu</span>
+            <span class="event-name">Bridgeland Farmers Market</span>
+          </div>
+          <div class="event-row">
+            <span class="event-date">29 Sat</span>
+            <span class="event-name">Farmers Makers Market</span>
+          </div>
+
+          <p class="events-month">September</p>
+          <div class="event-row">
+            <span class="event-date">17 Thu</span>
+            <span class="event-name">Bridgeland Farmers Market</span>
+          </div>
+          <div class="event-row">
+            <span class="event-date">19 Sat</span>
+            <span class="event-name">Farmers Makers Market</span>
+          </div>
+
+          <p class="events-month">October</p>
+          <div class="event-row">
+            <span class="event-date">17 Sat</span>
+            <span class="event-name">Farmers Makers Market</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCAL STORES -->
+  <section class="stores-section">
+    <div class="section-wrap">
+      <p class="stores-head reveal">Also available in local Calgary stores</p>
+      <div class="stores-grid">
+
+        <div class="store-card reveal">
+          <p class="store-name-big">Whole Life Go</p>
+          <a href="https://wholelifego.com" target="_blank" class="store-url">wholelifego.com</a>
+          <p class="store-addr">340 14th Street NW, Calgary</p>
+        </div>
+
+        <div class="store-card reveal reveal-delay-1">
+          <p class="store-name-big">Apple Lady</p>
+          <a href="https://applelady.ca" target="_blank" class="store-url">applelady.ca</a>
+          <p class="store-addr">3109 Palliser Drive SW, Calgary</p>
+        </div>
+
+        <div class="store-card reveal reveal-delay-2">
+          <p class="store-name-big">Sunnyside Natural Market</p>
+          <a href="https://sunnysidemarket.ca" target="_blank" class="store-url">sunnysidemarket.ca</a>
+          <p class="store-addr">338 10st NW, Calgary</p>
+        </div>
+
+        <div class="store-card reveal">
+          <p class="store-name-big">The Apothecary in Inglewood</p>
+          <a href="https://the-apothecary.ca" target="_blank" class="store-url">the-apothecary.ca</a>
+          <p class="store-addr">921 9th Ave SE, Calgary</p>
+        </div>
+
+        <div class="store-card reveal reveal-delay-1" style="grid-column: span 2;">
+          <span class="store-badge">Online pickup only</span>
+          <p class="store-name-big">Carino Japanese · Italian Kitchen</p>
+          <a href="https://eatcarino.com" target="_blank" class="store-url">eatcarino.com</a>
+          <p class="store-addr">2210 4st SW, Calgary</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+<script is:inline>
+  (function () {
+    const TEAS = [{"name": "Matcha", "desc": "Vibrant, stone-ground ceremonial tea rich in umami, with a smooth depth and naturally sweet finish."}, {"name": "Houjicha", "desc": "Roasted over charcoal until amber and smoky. Low in caffeine, warm in character."}, {"name": "Fukamushi Genmaicha", "desc": "Deep-steamed green tea blended with roasted brown rice \u2014 earthy, toasty, and smooth."}, {"name": "Sencha", "desc": "The quintessential Japanese green tea. Bright, grassy, refreshing."}, {"name": "Kabusecha", "desc": "Shaded for weeks before harvest, yielding a sweet, mellow cup with subtle umami."}];
+    const N = TEAS.length;
+
+    const reel   = document.getElementById('teaReel');
+    const belt   = document.getElementById('teaBelt');
+    const nameEl = document.getElementById('teaName');
+    const descEl = document.getElementById('teaDesc');
+    const infoEl = document.getElementById('teaInfo');
+    const dots   = Array.from(document.querySelectorAll('.tc-dot'));
+
+    const cardData = Array.from(belt.children).map(c => ({
+      src: c.querySelector('img').src,
+      alt: c.querySelector('img').alt,
+    }));
+
+    let activeLogIdx = 0;
+    let W = 0, w = 0;
+
+    function makeCard(logIdx) {
+      const ti = ((logIdx % N) + N) % N;
+      const d  = cardData[ti];
+      const el = document.createElement('div');
+      el.className = 'tc';
+      el._logIdx   = logIdx;
+      const img = document.createElement('img');
+      img.className = 'tc-img';
+      img.src = d.src; img.alt = d.alt; img.draggable = false;
+      el.appendChild(img);
+      return el;
+    }
+
+    // ── Replenish FIRST, then compute slot from fresh _start ─────
+    function replenish() {
+      const visHalf = Math.ceil(W / 2 / w) + 3;
+      const need_L  = activeLogIdx - visHalf;
+      const need_R  = activeLogIdx + visHalf;
+      while (belt._start > need_L) {
+        belt._start--;
+        belt.insertBefore(makeCard(belt._start), belt.firstChild);
+      }
+      while (belt._start + belt.children.length - 1 < need_R) {
+        belt.appendChild(makeCard(belt._start + belt.children.length));
+      }
+      while (belt.children.length > (need_R - need_L + 5) && belt._start < need_L) {
+        belt.removeChild(belt.firstChild); belt._start++;
+      }
+      while (belt.children.length > (need_R - need_L + 5) &&
+             belt._start + belt.children.length - 1 > need_R) {
+        belt.removeChild(belt.lastChild);
+      }
+    }
+
+    // ── Always: replenish first, THEN compute slot & tx ──────────
+    function applyTransform(animate) {
+      replenish();   // _start is now stable
+      const slot = activeLogIdx - belt._start;
+      const tx   = W / 2 - slot * w - w / 2;
+      belt.style.transition = animate
+        ? 'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)'
+        : 'none';
+      belt.style.transform = `translateX(${tx}px)`;
+      syncUI();
+    }
+
+    function syncUI() {
+      const ti = ((activeLogIdx % N) + N) % N;
+      dots.forEach((d, i) => d.classList.toggle('active', i === ti));
+      Array.from(belt.children).forEach(c => {
+        c.classList.toggle('active', c._logIdx === activeLogIdx);
+      });
+    }
+
+    function setInfo(ti) {
+      infoEl.classList.add('fading');
+      setTimeout(() => {
+        nameEl.textContent = TEAS[ti].name.toUpperCase();
+        descEl.textContent = TEAS[ti].desc;
+        infoEl.classList.remove('fading');
+      }, 180);
+    }
+
+    function goTo(logIdx, animate) {
+      const prevTi = ((activeLogIdx % N) + N) % N;
+      activeLogIdx = logIdx;
+      const newTi  = ((activeLogIdx % N) + N) % N;
+      applyTransform(animate);
+      if (newTi !== prevTi) setInfo(newTi);
+    }
+
+    function nudge(dir) { goTo(activeLogIdx + dir, true); }
+
+    function goToTea(teaIdx) {
+      const base = Math.floor(activeLogIdx / N) * N + teaIdx;
+      const opts = [base - N, base, base + N];
+      const nearest = opts.reduce((a, b) =>
+        Math.abs(b - activeLogIdx) < Math.abs(a - activeLogIdx) ? b : a);
+      goTo(nearest, true);
+    }
+
+    // ── Drag ─────────────────────────────────────────────────────
+    let dragX = null, dragStartLog = 0, moved = false;
+
+    function dragBegin(x) {
+      dragX = x; dragStartLog = activeLogIdx; moved = false;
+      belt.style.transition = 'none';
+    }
+    let dragLastTi = -1;
+
+    function dragMove(x) {
+      if (dragX === null) return;
+      const dx = x - dragX;
+      if (Math.abs(dx) > 4) moved = true;
+      const fracLog = dragStartLog - dx / w;
+      activeLogIdx = Math.round(fracLog);
+      replenish();
+      const fracSlot = fracLog - belt._start;
+      const tx = W / 2 - fracSlot * w - w / 2;
+      belt.style.transform = `translateX(${tx}px)`;
+      syncUI();
+      // Update name/desc when tea changes mid-drag
+      const ti = ((activeLogIdx % N) + N) % N;
+      if (ti !== dragLastTi) {
+        dragLastTi = ti;
+        setInfo(ti);
+      }
+    }
+    function dragEnd() {
+      if (dragX === null) return;
+      dragX = null;
+      goTo(activeLogIdx, true);
+    }
+
+    reel.addEventListener('mousedown',  e => { e.preventDefault(); dragBegin(e.clientX); });
+    window.addEventListener('mousemove',e => dragMove(e.clientX));
+    window.addEventListener('mouseup',  ()  => dragEnd());
+    reel.addEventListener('touchstart', e => dragBegin(e.touches[0].clientX), {passive:true});
+    reel.addEventListener('touchmove',  e => dragMove(e.touches[0].clientX),  {passive:true});
+    reel.addEventListener('touchend',   ()  => dragEnd(), {passive:true});
+    reel.addEventListener('click', e => { if (moved) e.preventDefault(); });
+
+    document.getElementById('tcPrev').addEventListener('click', () => nudge(-1));
+    document.getElementById('tcNext').addEventListener('click', () => nudge(1));
+    dots.forEach((d, i) => d.addEventListener('click', () => goToTea(i)));
+
+    // ── Init ─────────────────────────────────────────────────────
+    function init() {
+      belt.innerHTML = '';
+      W = reel.offsetWidth;
+      const probe = makeCard(0);
+      probe.style.visibility = 'hidden';
+      belt.appendChild(probe);
+      w = probe.offsetWidth || 200;
+      belt.innerHTML = '';
+      belt._start   = 0;
+      activeLogIdx  = 0;
+      replenish();
+      applyTransform(false);
+      nameEl.textContent = TEAS[0].name.toUpperCase();
+      descEl.textContent = TEAS[0].desc;
+    }
+
+    window.addEventListener('resize', () => { W = reel.offsetWidth; applyTransform(false); });
+    requestAnimationFrame(init);
+  })();
+  // ── Tea selection accordions ──────────────────────────────
+    // Accordion: opens downward, never pushes page up.
+    // Closing snaps max-height to 0 — content collapses below, not above.
+  </script>
+</SiteLayout>
+
+
+<style is:global>
+
+
+
+
+
+
+
+
+
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 62vh;
+      min-height: 480px;
+      max-height: 680px;
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('/images/home/img-1.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      opacity: 0.6;
+      transform: scale(1.04);
+      animation: heroZoom 12s var(--ease) forwards;
+    }
+
+    @keyframes heroZoom {
+      to { transform: scale(1); }
+    }
+
+    /* Gradient veil */
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(28,43,26,0.55) 0%,
+        rgba(28,43,26,0.25) 50%,
+        rgba(28,43,26,0.65) 100%
+      );
+    }
+
+    /* Signature element: Japanese character 一 (ichi / Issa) watermark */
+    .hero-kanji {
+      position: absolute;
+      right: clamp(30px, 8vw, 100px);
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--display);
+      font-size: clamp(200px, 25vw, 360px);
+      line-height: 1;
+      color: rgba(255,255,255,0.06);
+      letter-spacing: -0.05em;
+      pointer-events: none;
+      z-index: 1;
+      user-select: none;
+      font-style: italic;
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad) clamp(60px, 8vh, 100px);
+    }
+
+    .hero-eyebrow {
+      font-size: clamp(14px, 1.6vw, 20px);
+      letter-spacing: 0.2em;
+      color: var(--sage);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeUp 0.9s 0.3s var(--ease) both;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 36px; height: 1px;
+      background: var(--sage);
+    }
+
+    .hero-title {
+      font-family: 'Amiri', Georgia, serif;
+      font-size: clamp(52px, 8vw, 110px);
+      font-weight: 400;
+      font-style: normal;
+      line-height: 0.95;
+      color: #fff;
+      letter-spacing: -0.01em;
+      animation: fadeUp 0.9s 0.5s var(--ease) both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      display: block;
+      font-size: 0.7em;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(13px, 1.5vw, 16px);
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.65);
+      text-transform: uppercase;
+      margin-top: 20px;
+      animation: fadeUp 0.9s 0.7s var(--ease) both;
+    }
+
+    .hero-cta {
+      margin-top: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      transition: border-color 0.25s, gap 0.25s;
+      animation: fadeUp 0.9s 0.9s var(--ease) both;
+    }
+    .hero-cta svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 1.4; transition: transform 0.25s; }
+    .hero-cta:hover { border-color: var(--sage); gap: 20px; }
+    .hero-cta:hover svg { transform: translateX(4px); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      right: var(--pad);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUp 1s 1.2s var(--ease) both;
+    }
+    .scroll-hint span {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+    .scroll-hint-line {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-hint-line::after {
+      content: '';
+      position: absolute;
+      top: -100%; left: 0;
+      width: 100%; height: 100%;
+      background: var(--sage);
+      animation: scrollLine 1.8s 1.5s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%   { top: -100%; }
+      100% { top: 100%; }
+    }
+
+
+
+    /* ─── SECTION WRAPPER ────────────────────────────────── */
+    .section-wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: var(--section-v) var(--pad);
+    }
+
+
+
+    /* ─── SECTION LABEL ──────────────────────────────────── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: clamp(30px, 4vw, 54px);
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+
+
+    /* ─── OUR STORY ──────────────────────────────────────── */
+    .story-section { background: var(--offwhite); }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: center;
+    }
+
+    .story-img-wrap {
+      position: relative;
+    }
+    .story-img-wrap img {
+      width: 100%;
+      height: clamp(320px, 45vw, 560px);
+      object-fit: cover;
+    }
+    /* Decorative offset frame */
+    .story-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: -16px;
+      right: 16px;
+      bottom: 16px;
+      border: 1px solid var(--sage);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .story-text {}
+
+    .story-text h2 {
+      font-family: var(--display);
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+    .story-text h2 span {
+      display: block;
+      font-style: italic;
+      color: var(--sage);
+      font-size: 0.65em;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-style: normal;
+      font-family: var(--body);
+      font-weight: 400;
+      margin-bottom: 8px;
+      font-size: 11px;
+    }
+
+    .story-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--sage);
+      margin-bottom: 28px;
+    }
+
+    .story-text p {
+      font-size: clamp(14px, 1.4vw, 16px);
+      line-height: 1.85;
+      color: var(--mid);
+      max-width: 480px;
+    }
+
+    .story-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 32px;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+      transition: color 0.2s, border-color 0.2s, gap 0.2s;
+    }
+    .story-link svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; transition: transform 0.2s; }
+    .story-link:hover { color: var(--sage); border-color: var(--sage); gap: 16px; }
+    .story-link:hover svg { transform: translateX(4px); }
+
+
+
+    /* ─── TEA SELECTION ──────────────────────────────────── */
+    .tea-section { background: var(--offwhite); }
+
+    .tea-section-head {
+      text-align: center;
+      margin-bottom: clamp(24px, 3vw, 40px);
+    }
+    .tea-section-head h2 {
+      font-family: var(--display);
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 300;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+    .tea-section-head p {
+      margin-top: 10px;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--light);
+      text-transform: uppercase;
+    }
+
+    /* Viewport — hard clip, no fade */
+    .tea-reel {
+      overflow: hidden;
+      position: relative;
+      cursor: grab;
+      user-select: none;
+    }
+    .tea-reel:active { cursor: grabbing; }
+
+    /* Belt — JS moves this */
+    .tea-belt {
+      display: flex;
+      align-items: center;
+      will-change: transform;
+    }
+
+    /* Card */
+    .tc {
+      flex: 0 0 auto;
+      width: 200px;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Circle image */
+    .tc-img {
+      width: 168px;
+      height: 168px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 2px solid transparent;
+      transition: border-color 0.35s;
+      flex-shrink: 0;
+    }
+    .tc.active .tc-img {
+      border-color: var(--sage);
+    }
+
+    /* Nav row */
+    .tea-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 32px 0 20px;
+    }
+
+    .tc-arrow {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 6px;
+      display: flex;
+      align-items: center;
+      color: var(--ink);
+      transition: opacity 0.2s;
+    }
+    .tc-arrow:hover { opacity: 0.5; }
+    /* Arrow SVG drawn like reference: long dash + arrowhead */
+    .tc-arrow svg {
+      width: 48px; height: 18px;
+      overflow: visible;
+    }
+
+    .tc-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--ink);
+      border: none; cursor: pointer; padding: 0;
+      opacity: 0.25;
+      transition: opacity 0.25s, transform 0.25s;
+      flex-shrink: 0;
+    }
+    .tc-dot.active {
+      opacity: 1;
+      transform: scale(1.0);
+      /* ring effect */
+      box-shadow: 0 0 0 2px var(--offwhite), 0 0 0 3.5px var(--ink);
+    }
+
+    /* Info panel */
+    .tea-info {
+      text-align: center;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 80px;
+    }
+    .tea-info-name {
+      font-family: var(--display);
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 10px;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .tea-info-desc {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--mid);
+      transition: opacity 0.25s 0.04s, transform 0.25s 0.04s;
+    }
+    .tea-info.fading .tea-info-name,
+    .tea-info.fading .tea-info-desc {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    .btn-explore {
+      display: inline-block;
+      border: 1.5px solid var(--ink);
+      color: var(--ink);
+      padding: 14px 56px;
+      font-size: 11.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-family: var(--body);
+      font-weight: 500;
+      margin-top: 30px;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-explore:hover { background: var(--ink); color: #fff; }
+
+
+
+        /* ─── FARMERS ────────────────────────────────────────── */
+    .farmers-section { background: var(--mist); }
+
+    .farmers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: center;
+    }
+
+    .farmers-img-wrap {
+      position: relative;
+      order: 2;
+    }
+    .farmers-img-wrap img {
+      width: 100%;
+      height: clamp(360px, 45vw, 580px);
+      object-fit: cover;
+      object-position: center;
+    }
+    /* Sage accent strip */
+    .farmers-img-wrap::after {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 24px;
+      bottom: -24px;
+      width: 4px;
+      background: var(--sage);
+      opacity: 0.5;
+    }
+
+    .farmers-text { order: 1; }
+
+    .farmers-text h2 {
+      font-family: var(--display);
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.05;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .farmers-text .lead {
+      font-size: clamp(16px, 1.8vw, 20px);
+      color: var(--mid);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+    .farmers-rule {
+      width: 40px; height: 1px;
+      background: var(--sage);
+      margin-bottom: 24px;
+    }
+    .farmers-text .body {
+      font-size: clamp(14px, 1.4vw, 16px);
+      line-height: 1.85;
+      color: var(--light);
+    }
+
+
+
+    /* ─── FIND US / EVENTS ───────────────────────────────── */
+    .findus-section { background: var(--offwhite); }
+
+    .findus-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: flex-start;
+    }
+
+    /* Instagram column */
+    .ig-col {}
+    .ig-heading {
+      font-size: 14px;
+      color: var(--mid);
+      margin-bottom: 4px;
+    }
+    .ig-handle {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+    .ig-mosaic {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+    .ig-tile {
+      aspect-ratio: 1;
+      background: var(--stone);
+      overflow: hidden;
+    }
+    .ig-tile:nth-child(1) { background: #c8d4c0; }
+    .ig-tile:nth-child(2) { background: #b0bca8; }
+    .ig-tile:nth-child(3) { background: #d8c8b0; }
+    .ig-tile:nth-child(4) { background: #d4dccc; }
+    .ig-tile:nth-child(5) { background: #c0ccb8; }
+    .ig-tile:nth-child(6) { background: #e0d8c8; }
+
+    .ig-load-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 14px;
+      border: 1px solid var(--rule);
+      background: transparent;
+      font-family: var(--body);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .ig-load-btn:hover { border-color: var(--sage); color: var(--ink); }
+
+    /* Events */
+    .events-col {}
+    .events-season {
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 28px;
+    }
+    .events-month {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--ink);
+      margin: 28px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .event-row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+    .event-date {
+      font-size: 13px;
+      color: var(--sage);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .event-name {
+      font-size: 13.5px;
+      color: var(--mid);
+      line-height: 1.55;
+      letter-spacing: 0.01em;
+    }
+
+
+
+    /* ─── LOCAL STORES ───────────────────────────────────── */
+    .stores-section {
+      background: var(--stone);
+      border-top: 1px solid var(--rule);
+    }
+
+    .stores-head {
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: clamp(32px, 4vw, 52px);
+    }
+
+    .stores-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    .store-card {
+      background: var(--stone);
+      padding: clamp(24px, 3vw, 40px);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .store-card:hover { background: var(--offwhite); }
+
+    .store-name-big {
+      font-family: var(--display);
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .store-name-alt {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .store-badge {
+      display: inline-block;
+      font-size: 9.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--sage);
+      padding: 3px 8px;
+      margin-bottom: 4px;
+      width: fit-content;
+    }
+    .store-url {
+      font-size: 12px;
+      color: var(--sage);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .store-url:hover { color: var(--ink); }
+    .store-addr {
+      font-size: 12px;
+      color: var(--light);
+      letter-spacing: 0.02em;
+    }
+
+
+
+
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      nav { gap: 20px; }
+      nav a { font-size: 11px; }
+
+      .story-grid,
+      .farmers-grid { gap: 40px; }
+
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+
+      .story-grid { grid-template-columns: 1fr; }
+      .story-img-wrap::before { display: none; }
+      .story-img-wrap img { height: 280px; }
+      .story-text h2 { font-size: 38px; }
+
+      .farmers-grid { grid-template-columns: 1fr; }
+      .farmers-img-wrap { order: -1; }
+      .farmers-img-wrap::after { display: none; }
+      .farmers-img-wrap img { height: 280px; }
+
+      .findus-grid { grid-template-columns: 1fr; }
+      .ig-col { order: 1; }
+      .events-col { order: 2; }
+
+      .stores-grid { grid-template-columns: 1fr 1fr; }
+
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+
+      .hero-title { font-size: 52px; }
+      .hero-kanji { font-size: 200px; opacity: 0.04; }
+    }
+
+    @media (max-width: 480px) {
+      .tea-grid { grid-template-columns: 1fr; }
+      .stores-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+  
+</style>
