@@ -178,7 +178,7 @@ export async function checkoutUrl(): Promise<string> {
   const origin = typeof window !== "undefined" ? window.location.origin : "";
   const session = await redirects.createRedirectSession({
     ecomCheckout: { checkoutId: rawId(raw) },
-    callbacks: { postFlowUrl: origin ? `${origin}/` : undefined, thankYouPageUrl: origin ? `${origin}/` : undefined },
+    callbacks: { postFlowUrl: origin ? `${origin}/` : undefined, thankYouPageUrl: origin ? `${origin}/order-confirmation` : undefined },
   });
   const url = session?.redirectSession?.fullUrl;
   if (!url) throw new Error("Checkout couldn't start: no redirect URL returned.");

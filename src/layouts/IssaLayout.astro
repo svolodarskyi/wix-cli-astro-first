@@ -171,6 +171,8 @@ const cur = (href: string) => (path === href ? "page" : undefined);
       })();
     </script>
     <script is:inline src="/menu.js"></script>
-    <script is:inline src="/cart.js"></script>
+    <script>
+      import "../scripts/wix-cart";
+    </script>
   </body>
 </html>

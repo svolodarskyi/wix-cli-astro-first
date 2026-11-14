@@ -44,7 +44,7 @@ import SiteLayout from "../layouts/IssaLayout.astro";
 <script is:inline>
   (function () {
     var q = new URLSearchParams(location.search);
-    var order = q.get('order') || q.get('orderNumber');
+    var order = q.get('order') || q.get('orderNumber') || q.get('orderId');
     var open = document.getElementById('return-open'), done = document.getElementById('return-done');
     function init() {
       if (order) {

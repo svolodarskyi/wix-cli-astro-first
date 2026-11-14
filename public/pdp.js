@@ -72,12 +72,14 @@
     if (add.disabled || add.classList.contains('is-loading')) return;
     var label = add.textContent, v = sel;
     add.classList.add('is-loading'); add.setAttribute('aria-busy', 'true'); add.textContent = 'Adding…';
-    setTimeout(function () {
-      add.classList.remove('is-loading'); add.removeAttribute('aria-busy'); add.classList.add('is-added'); add.textContent = 'Added ✓';
-      if (window.IssaCart) window.IssaCart.add({ id: v.id, name: v.name, variant: v.variant || (multi ? v.label : ''), price: v.price, was: v.was || 0, img: v.img }, qty, add);
-      else showMsg('The cart is unavailable right now. Please try again.');
-      setTimeout(function () { add.classList.remove('is-added'); update(); }, 1400);
-    }, 380);
+    function done(ok, err) {
+      add.classList.remove('is-loading'); add.removeAttribute('aria-busy');
+      if (ok) { add.classList.add('is-added'); add.textContent = 'Added ✓'; }
+      else { showMsg(err || 'We could not add this to your cart. Please try again.'); }
+      setTimeout(function () { add.classList.remove('is-added'); update(); }, ok ? 1400 : 0);
+    }
+    if (!window.IssaCart) { done(false, 'The cart is still loading. Please try again in a moment.'); return; }
+    window.IssaCart.add({ id: v.id, name: v.name }, qty, add).then(function () { done(true); }, function (e) { done(false, e && e.message); });
   });
 
   /* ----- accordions (max-height) ----- */
