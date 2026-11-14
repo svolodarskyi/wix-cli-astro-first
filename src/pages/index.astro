@@ -16,7 +16,7 @@ import SiteLayout from "../layouts/IssaLayout.astro";
         Directly<br>from Farmers
       </h1>
       <p class="hero-subtitle">Japanese ceremonial &amp; everyday tea</p>
-      <a href="/teas" class="hero-cta">
+      <a href="/tea-selection" class="hero-cta">
         Explore our selection
         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -117,7 +117,7 @@ import SiteLayout from "../layouts/IssaLayout.astro";
         <p class="tea-info-desc" id="teaDesc">Vibrant, stone-ground ceremonial tea rich in umami, with a smooth depth and naturally sweet finish.</p>
       </div>
 
-      <a href="/teas" class="btn-explore reveal">Explore</a>
+      <a href="/tea-selection" class="btn-explore reveal">Explore</a>
     </div>
   </section>
 
@@ -287,8 +287,6 @@ import SiteLayout from "../layouts/IssaLayout.astro";
       </div>
     </div>
   </section>
-</SiteLayout>
-
 <script is:inline>
   (function () {
     const TEAS = [{"name": "Matcha", "desc": "Vibrant, stone-ground ceremonial tea rich in umami, with a smooth depth and naturally sweet finish."}, {"name": "Houjicha", "desc": "Roasted over charcoal until amber and smoky. Low in caffeine, warm in character."}, {"name": "Fukamushi Genmaicha", "desc": "Deep-steamed green tea blended with roasted brown rice \u2014 earthy, toasty, and smooth."}, {"name": "Sencha", "desc": "The quintessential Japanese green tea. Bright, grassy, refreshing."}, {"name": "Kabusecha", "desc": "Shaded for weeks before harvest, yielding a sweet, mellow cup with subtle umami."}];
@@ -459,6 +457,8 @@ import SiteLayout from "../layouts/IssaLayout.astro";
     // Accordion: opens downward, never pushes page up.
     // Closing snaps max-height to 0 — content collapses below, not above.
   </script>
+</SiteLayout>
+
 
 <style is:global>
 

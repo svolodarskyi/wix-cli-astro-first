@@ -1,7 +1,7 @@
 (function () {
   var items = [
-    ['About', '/our-story'], ['Farmers', '/farmers'], ['Tea Selection', '/teas'],
-    ['Shop', [['Tea', '/category/tea'], ['Tea Ware', '/category/tea-wares'], ['Pottery', '#']]],
+    ['About', '/our-story'], ['Farmers', '/farmers'], ['Tea Selection', '/tea-selection'],
+    ['Shop', [['Tea', '/shop-tea'], ['Tea Ware', '/tea-ware'], ['Pottery', '#']]],
     ['Experiences', '#'], ['Journal', '#'],
     ['Location', '/find-us'], ['Events', '/experiences']
   ];

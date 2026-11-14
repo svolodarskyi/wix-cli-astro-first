@@ -13,7 +13,8 @@ import SiteLayout from "../layouts/IssaLayout.astro";
         <h1>Your cart is still here</h1>
         <p class="lead" data-open-copy>It looks like checkout wasn't finished, so no order has been placed. Your items are saved if you'd like to pick up where you left off.</p>
         <div class="status-actions">
-          <a href="/category/tea" class="btn-explore">Return to shop</a>
+          <button type="button" class="btn-explore btn-fill" data-open-cart hidden>Open cart</button>
+          <a href="/shop-tea" class="btn-explore">Return to shop</a>
         </div>
       </div>
 
@@ -30,7 +31,7 @@ import SiteLayout from "../layouts/IssaLayout.astro";
           <div><b>Questions?</b><p>Write to <a href="mailto:issagreentea@gmail.com">issagreentea@gmail.com</a> and we'll be happy to help.</p></div>
         </div>
         <div class="status-actions">
-          <a href="/category/tea" class="btn-explore btn-fill">Continue shopping</a>
+          <a href="/shop-tea" class="btn-explore btn-fill">Continue shopping</a>
           <a href="/our-story" class="btn-explore">Our story</a>
         </div>
       </div>
@@ -43,12 +44,23 @@ import SiteLayout from "../layouts/IssaLayout.astro";
 <script is:inline>
   (function () {
     var q = new URLSearchParams(location.search);
-    var order = q.get('order') || q.get('orderNumber') || q.get('orderId');
+    var order = q.get('order') || q.get('orderNumber');
     var open = document.getElementById('return-open'), done = document.getElementById('return-done');
-    if (order && open && done) {
-      open.hidden = true; done.hidden = false;
-      var el = document.querySelector('[data-order-no]'); el.textContent = 'Order ' + order; el.hidden = false;
+    function init() {
+      if (order) {
+        open.hidden = true; done.hidden = false;
+        var el = document.querySelector('[data-order-no]'); el.textContent = 'Order ' + order; el.hidden = false;
+        if (window.IssaCart) window.IssaCart.clear();
+        return;
+      }
+      var n = window.IssaCart ? window.IssaCart.count() : 0;
+      if (n > 0) {
+        var b = document.querySelector('[data-open-cart]'); b.hidden = false;
+        b.addEventListener('click', function () { window.IssaCart.open(b); });
+        document.querySelector('[data-open-copy]').textContent = 'It looks like checkout wasn\'t finished, so no order has been placed. Your ' + n + (n === 1 ? ' item is' : ' items are') + ' still in your cart.';
+      }
     }
+    window.addEventListener('DOMContentLoaded', init);
   })();
 </script>
 </SiteLayout>

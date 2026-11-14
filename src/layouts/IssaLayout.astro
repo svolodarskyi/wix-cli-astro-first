@@ -1,15 +1,12 @@
 ---
 // Issa Green site chrome: announcement bar, header + nav, footer, cart drawer.
-// Keeps the Wix storefront pieces: <slot name="seo-tags" /> in <head>, one CartButton, one CartDrawer.
-import CartButton from "../components/storefront/CartButton";
-import CartDrawer from "../components/storefront/CartDrawer";
-import "../styles/global.css";
+// The design cart (cart.js / cart.css, localStorage for now) is wired here; Wix cart comes later.
 import "../styles/site.css";
 
 interface Props {
   title: string;
   description?: string;
-  footer?: "simple";
+  footer?: "full" | "simple" | "none";
 }
 const { title, description, footer = "full" } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, "");
@@ -35,6 +32,7 @@ const cur = (href: string) => (path === href ? "page" : undefined);
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/menu.css" />
+    <link rel="stylesheet" href="/cart.css" />
   </head>
   <body>
     <div class="topbar">Free Calgary local delivery over $75 &nbsp;·&nbsp; Free shipping over $150 in Canada</div>
@@ -49,12 +47,12 @@ const cur = (href: string) => (path === href ? "page" : undefined);
         <nav>
           <a href="/our-story" aria-current={cur("/our-story")}>About</a>
           <a href="/farmers" aria-current={cur("/farmers")}>Farmers</a>
-          <a href="/teas" aria-current={cur("/teas")}>Tea Selection</a>
+          <a href="/tea-selection" aria-current={cur("/tea-selection")}>Tea Selection</a>
           <div class="nav-group">
             <button type="button" class="nav-parent" aria-expanded="false" aria-haspopup="true">Shop</button>
             <div class="nav-sub">
-              <a href="/category/tea">Tea</a>
-              <a href="/category/tea-wares">Tea Ware</a>
+              <a href="/shop-tea">Tea</a>
+              <a href="/tea-ware">Tea Ware</a>
               <a href="#">Pottery</a>
             </div>
           </div>
@@ -68,14 +66,17 @@ const cur = (href: string) => (path === href ? "page" : undefined);
           <button aria-label="Language">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"></path></svg>
           </button>
-          <CartButton client:only="react" />
+          <button aria-label="Cart (0 items)">
+            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+            <span>0</span>
+          </button>
         </div>
       </div>
     </header>
 
     <slot />
 
-    {footer === "simple" ? (
+    {footer === "none" ? null : footer === "simple" ? (
       <footer class="simple">
         <div class="footer-inner">
           <div class="footer-col">
@@ -86,9 +87,9 @@ const cur = (href: string) => (path === href ? "page" : undefined);
           </div>
           <div class="footer-col">
             <h4>Shop</h4>
-            <a href="/teas">Tea Selection</a>
-            <a href="/category/tea">Shop Tea</a>
-            <a href="/category/tea-wares">Tea Ware</a>
+            <a href="/tea-selection">Tea Selection</a>
+            <a href="/shop-tea">Shop Tea</a>
+            <a href="/tea-ware">Tea Ware</a>
           </div>
           <div class="footer-col">
             <h4>Contact</h4>
@@ -122,7 +123,7 @@ const cur = (href: string) => (path === href ? "page" : undefined);
             <a href="#">Wholesale</a>
             <a href="/farmers">日本の農家さんへ</a>
             <a href="/our-story">About us</a>
-            <a href="/shipping">Shipping &amp; returns</a>
+            {!Astro.url.pathname.startsWith("/products/") && <a href="/shipping">Shipping &amp; returns</a>}
           </div>
 
           <div class="footer-col">
@@ -156,8 +157,6 @@ const cur = (href: string) => (path === href ? "page" : undefined);
     </footer>
     )}
 
-    <CartDrawer client:only="react" />
-
     <script is:inline>
       // Scroll reveal
       (function () {
@@ -172,5 +171,6 @@ const cur = (href: string) => (path === href ? "page" : undefined);
       })();
     </script>
     <script is:inline src="/menu.js"></script>
+    <script is:inline src="/cart.js"></script>
   </body>
 </html>
