@@ -35,10 +35,9 @@ export async function loadShop(group: Group): Promise<{ sections: Section[]; err
         return id ? searchCatalog({ categoryId: id, limit: 100 }) : Promise.resolve({ products: [] as ProductSummary[] });
       }),
     ]);
-    const inParent = new Set(all.products.map((p) => p.id));
-    const seen = new Set<string>();
+        const seen = new Set<string>();
     const out: Section[] = defs.map((d, i) => {
-      const products = perSection[i].products.filter((p) => inParent.has(p.id) && !seen.has(p.id));
+      const products = perSection[i].products.filter((p) => !seen.has(p.id));
       products.forEach((p) => seen.add(p.id));
       return { ...d, products, emptyText: d.id === "gift-set" ? "New gift sets are coming soon." : undefined };
     });

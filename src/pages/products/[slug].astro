@@ -53,11 +53,8 @@ const pdp = {
 };
 const plain = (h) => h.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 const desc = plain(p.descriptionHtml).slice(0, 155) || `${p.name} from Issa Green`;
-const panels = [
-  ...p.infoSections.map((s) => ({ title: s.title, html: s.html })),
-  { title: "Shipping info", html: `<p><strong>Calgary</strong> Within Calgary city limit: $7 flat rate. Free delivery over $75.</p><p><strong>Rest of Canada</strong> $12 flat rate shipping by Canada Post or courier service. Free shipping over $150.</p><p>If you prefer another shipping method, please do not hesitate to contact us. We will arrange a special shipment.</p>` },
-  { title: "Return & refund policy", html: `<p><strong>Tea</strong> Due to the character of our products, we cannot accept returns or refunds of packaged tea and food.</p><p><strong>Tea ware & goods</strong> We accept returns and issue a gift card for the same amount as the purchased goods. Customers pay the postage for returns.</p><p>Please inform us about defects immediately by email at <a href="mailto:issagreentea@gmail.com">issagreentea@gmail.com</a>. We will make an exchange as soon as possible.</p>` },
-];
+// Info sections (farmer, how to brew, shipping, returns…) are the merchant's own, from Wix.
+const panels = p.infoSections.map((s) => ({ title: s.title, html: s.html }));
 const priceLine = (s) => (s.availability === "OUT_OF_STOCK" && !s.preorder ? "Out of stock" : s.price !== s.maxPrice ? `From ${fmt(s.price)}` : fmt(s.price));
 ---
 
