@@ -1,7 +1,8 @@
 (function () {
   var items = [
     ['About', '/our-story'], ['Farmers', '/farmers'], ['Tea Selection', '/teas'],
-    ['Shop', [['Tea', '/category/tea'], ['Tea Ware', '/category/tea-wares']]],
+    ['Shop', [['Tea', '/category/tea'], ['Tea Ware', '/category/tea-wares'], ['Pottery', '#']]],
+    ['Experiences', '#'], ['Journal', '#'],
     ['Location', '/find-us'], ['Events', '/experiences']
   ];
   var header = document.querySelector('header');

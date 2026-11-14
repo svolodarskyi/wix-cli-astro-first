@@ -9,9 +9,9 @@ import "../styles/site.css";
 interface Props {
   title: string;
   description?: string;
-  active?: string;
+  footer?: "simple";
 }
-const { title, description } = Astro.props;
+const { title, description, footer = "full" } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, "");
 const cur = (href: string) => (path === href ? "page" : undefined);
 ---
@@ -55,13 +55,19 @@ const cur = (href: string) => (path === href ? "page" : undefined);
             <div class="nav-sub">
               <a href="/category/tea">Tea</a>
               <a href="/category/tea-wares">Tea Ware</a>
+              <a href="#">Pottery</a>
             </div>
           </div>
+          <a href="#">Experiences</a>
+          <a href="#">Journal</a>
           <a href="/find-us" aria-current={cur("/find-us")}>Location</a>
           <a href="/experiences" aria-current={cur("/experiences")}>Events</a>
         </nav>
 
         <div class="header-actions">
+          <button aria-label="Language">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"></path></svg>
+          </button>
           <CartButton client:only="react" />
         </div>
       </div>
@@ -69,6 +75,36 @@ const cur = (href: string) => (path === href ? "page" : undefined);
 
     <slot />
 
+    {footer === "simple" ? (
+      <footer class="simple">
+        <div class="footer-inner">
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="/our-story">About Us</a>
+            <a href="/farmers">Farmers</a>
+            <a href="/wholesale">Wholesale</a>
+          </div>
+          <div class="footer-col">
+            <h4>Shop</h4>
+            <a href="/teas">Tea Selection</a>
+            <a href="/category/tea">Shop Tea</a>
+            <a href="/category/tea-wares">Tea Ware</a>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="/find-us">Location</a>
+            <a href="/contact">Contact Form</a>
+            <a href="mailto:issagreentea@gmail.com">issagreentea@gmail.com</a>
+          </div>
+          <div class="footer-col">
+            <h4>Follow</h4>
+            <a href="https://www.facebook.com/issagreentea/" target="_blank" rel="noopener">Facebook</a>
+            <a href="http://www.instagram.com/issagreentea/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 by ISSA GREEN</div>
+      </footer>
+    ) : (
     <footer>
       <div class="footer-inner">
         <div class="footer-top">
@@ -83,6 +119,7 @@ const cur = (href: string) => (path === href ? "page" : undefined);
 
           <div class="footer-col">
             <h4>Company</h4>
+            <a href="#">Wholesale</a>
             <a href="/farmers">日本の農家さんへ</a>
             <a href="/our-story">About us</a>
             <a href="/shipping">Shipping &amp; returns</a>
@@ -90,9 +127,10 @@ const cur = (href: string) => (path === href ? "page" : undefined);
 
           <div class="footer-col">
             <h4>Contact</h4>
+            <a href="#">Contact form</a>
             <p>
               <span class="email-label">Email</span>
-              <a href="mailto:issagreentea@gmail.com">issagreentea@gmail.com</a>
+              issagreentea@gmail.com
             </p>
           </div>
 
@@ -116,6 +154,7 @@ const cur = (href: string) => (path === href ? "page" : undefined);
         </div>
       </div>
     </footer>
+    )}
 
     <CartDrawer client:only="react" />
 
