@@ -3,6 +3,7 @@
 // Exposes window.IssaCart for pdp.js / the product cards / the order-confirmation page.
 import {
   addLine,
+  clearBusy,
   getCartState,
   goToCheckout,
   refreshCart,
@@ -275,4 +276,19 @@ render();
   // Wix empties the cart itself once an order is placed; just re-read it.
   clear: () => refreshCart(),
 };
+// Back from the Wix-hosted checkout: the browser restores this page from its back/forward cache with
+// the "Redirecting…" state frozen in. Reset it and re-read the cart (the buyer may have changed it).
+function resetAfterCheckout() {
+  if (checkoutState === "idle" && !getCartState().busy) return;
+  checkoutState = "idle";
+  clearBusy();
+  void refreshCart().then(render);
+  render();
+}
+window.addEventListener("pageshow", (e) => {
+  if ((e as PageTransitionEvent).persisted || checkoutState !== "idle") resetAfterCheckout();
+});
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") resetAfterCheckout();
+});
 if (new URLSearchParams(location.search).get("cart") === "open") open();

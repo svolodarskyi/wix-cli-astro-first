@@ -129,6 +129,11 @@ export async function goToCheckout(): Promise<void> {
   }
 }
 
+/** Clear the busy flag — used when the buyer returns (Back) from the hosted checkout to a restored page. */
+export function clearBusy(): void {
+  setState({ busy: false, error: null });
+}
+
 export function setCartOpen(open: boolean): void {
   setState({ open });
 }
