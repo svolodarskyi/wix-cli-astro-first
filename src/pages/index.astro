@@ -1,0 +1,27 @@
+---
+// Placeholder home: the real home (product rail) comes with the storefront build.
+import IssaLayout from "../layouts/IssaLayout.astro";
+---
+
+<IssaLayout title="Organic Japanese Tea | Issa Green" description="Organic Japanese tea from independent farmers, from Calgary.">
+  <section class="status-page">
+    <div class="section-wrap">
+      <p class="section-label">Issa Green</p>
+      <h1>Organic Japanese tea</h1>
+      <p class="lead">Connecting independent Japanese farmers with tea lovers. The shop is coming soon.</p>
+      <div class="status-actions">
+        <a href="/our-story" class="btn-explore btn-fill">Our story</a>
+        <a href="/find-us" class="btn-explore">Find us</a>
+      </div>
+    </div>
+  </section>
+</IssaLayout>
+
+<style is:global>
+  .status-page { background: var(--mist); text-align: center; padding: clamp(80px, 12vw, 140px) 0; }
+  .status-page h1 { font-family: var(--display); font-size: clamp(40px, 6vw, 56px); font-weight: 400; margin-bottom: 20px; }
+  .status-page .lead { font-size: 18px; color: var(--mid); max-width: 560px; margin: 0 auto 32px; }
+  .status-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-explore { display: inline-flex; padding: 14px 32px; border: 1px solid var(--ink); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+  .btn-fill { background: var(--ink); color: #fff; }
+</style>

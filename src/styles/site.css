@@ -1,0 +1,237 @@
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --ink:       #1C2B1A;
+      --sage:      #7A9B6E;
+      --slate:     #748092;
+      --stone:     #F0EDE6;
+      --mist:      #EEF0EB;
+      --offwhite:  #FAFAF7;
+      --mid:       #5C5C5C;
+      --light:     #8F8F8F;
+      --rule:      rgba(28,43,26,0.12);
+
+      --display:   'Amiri', Georgia, serif;
+      --body:      'DM Sans', system-ui, sans-serif;
+
+      --max:       1200px;
+      --pad:       clamp(24px, 5vw, 80px);
+      --section-v: clamp(60px, 8vw, 120px);
+
+      --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--body);
+      background: var(--offwhite);
+      color: var(--ink);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; color: inherit; }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.24s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ─── ANNOUNCEMENT BAR ───────────────────────────────── */
+    .topbar {
+      background: var(--ink);
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      font-size: 11.5px;
+      letter-spacing: 0.09em;
+      padding: 9px 20px;
+      font-family: var(--body);
+    }
+
+    /* ─── HEADER ─────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(250,250,247,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .header-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+      flex-shrink: 0;
+    }
+    .logo-name {
+      font-family: var(--body);
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+    .logo-sub {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--light);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    nav a {
+      font-size: 12px;
+      letter-spacing: 0.09em;
+      color: var(--mid);
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--sage);
+      transition: width 0.25s var(--ease);
+    }
+    nav a:hover { color: var(--ink); }
+    nav a:hover::after { width: 100%; }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    .header-actions button {
+      background: none; border: none; cursor: pointer;
+      padding: 4px; color: var(--ink);
+      display: flex; align-items: center; gap: 5px;
+      font-size: 11px; letter-spacing: 0.06em; font-family: var(--body);
+      color: var(--mid);
+    }
+    .header-actions svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.4; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.5);
+      padding: clamp(50px, 7vw, 90px) var(--pad) clamp(28px, 4vw, 44px);
+    }
+
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: clamp(30px, 4vw, 60px);
+      padding-bottom: clamp(36px, 5vw, 60px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 28px;
+    }
+
+    .footer-brand .f-name {
+      font-family: var(--body);
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .footer-brand .f-sub {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .footer-brand p {
+      font-size: 13px;
+      line-height: 1.75;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 20px;
+    }
+    .footer-col a, .footer-col p {
+      display: block;
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 10px;
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+      line-height: 1.5;
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-col .email-label { color: rgba(255,255,255,0.35); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+
+    .social-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 4px;
+    }
+    .social-btn {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-btn:hover { border-color: var(--sage); color: #fff; }
+    .social-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .footer-bottom p {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.25);
+    }

@@ -1,0 +1,137 @@
+---
+// Issa Green site chrome: announcement bar, header + nav, footer, cart drawer.
+// Keeps the Wix storefront pieces: <slot name="seo-tags" /> in <head>, one CartButton, one CartDrawer.
+import CartButton from "../components/storefront/CartButton";
+import CartDrawer from "../components/storefront/CartDrawer";
+import "../styles/global.css";
+import "../styles/site.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  active?: string;
+}
+const { title, description } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, "");
+const cur = (href: string) => (path === href ? "page" : undefined);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    {!Astro.slots.has("seo-tags") && <title>{title}</title>}
+    {description && !Astro.slots.has("seo-tags") && <meta name="description" content={description} />}
+    {!Astro.slots.has("seo-tags") && <meta property="og:title" content={title} />}
+    {description && !Astro.slots.has("seo-tags") && <meta property="og:description" content={description} />}
+    <slot name="seo-tags" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/menu.css" />
+  </head>
+  <body>
+    <div class="topbar">Free Calgary local delivery over $75 &nbsp;·&nbsp; Free shipping over $150 in Canada</div>
+
+    <header>
+      <div class="header-inner">
+        <a href="/" class="logo">
+          <span class="logo-name">Issa Green</span>
+          <span class="logo-sub">Japanese Organic Tea</span>
+        </a>
+
+        <nav>
+          <a href="/our-story" aria-current={cur("/our-story")}>About</a>
+          <a href="/farmers" aria-current={cur("/farmers")}>Farmers</a>
+          <a href="/teas" aria-current={cur("/teas")}>Tea Selection</a>
+          <div class="nav-group">
+            <button type="button" class="nav-parent" aria-expanded="false" aria-haspopup="true">Shop</button>
+            <div class="nav-sub">
+              <a href="/category/tea">Tea</a>
+              <a href="/category/tea-wares">Tea Ware</a>
+            </div>
+          </div>
+          <a href="/find-us" aria-current={cur("/find-us")}>Location</a>
+          <a href="/experiences" aria-current={cur("/experiences")}>Events</a>
+        </nav>
+
+        <div class="header-actions">
+          <CartButton client:only="react" />
+        </div>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <p class="f-name">Issa Green</p>
+            <p class="f-sub">Japanese Organic Tea · Calgary</p>
+            <p>
+              Connecting independent Japanese farmers with Canadians who value authentic, organic tea — sourced with
+              care, delivered with integrity.
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="/farmers">日本の農家さんへ</a>
+            <a href="/our-story">About us</a>
+            <a href="/shipping">Shipping &amp; returns</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <p>
+              <span class="email-label">Email</span>
+              <a href="mailto:issagreentea@gmail.com">issagreentea@gmail.com</a>
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Follow</h4>
+            <div class="social-row">
+              <a href="https://www.facebook.com/issagreentea/" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+              </a>
+              <a href="http://www.instagram.com/issagreentea/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"></circle></svg>
+              </a>
+            </div>
+            <a href="http://www.instagram.com/issagreentea/" target="_blank" rel="noopener" class="insta-handle">@issagreentea</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2020 – 2026 ISSA GREEN. All rights reserved.</p>
+          <p>Made with care in Calgary</p>
+        </div>
+      </div>
+    </footer>
+
+    <CartDrawer client:only="react" />
+
+    <script is:inline>
+      // Scroll reveal
+      (function () {
+        var els = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('visible'); }); return; }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        els.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
+    <script is:inline src="/menu.js"></script>
+  </body>
+</html>
