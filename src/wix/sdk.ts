@@ -21,6 +21,10 @@ import { WIX_CLIENT_ID } from "./config";
 
 const STORAGE_KEY = `wix-session-${WIX_CLIENT_ID ?? "ambient"}`;
 
+// Server (Worker isolate): no window — keep the anonymous visitor token in memory so public catalog
+// reads don't mint a new token per call. Never used for cart/member identity (those run in the browser).
+let serverTokens: Tokens = EMPTY_TOKENS;
+
 function browserTokenStorage(): TokenStorage {
   return {
     getTokens(): Tokens {
@@ -32,10 +36,13 @@ function browserTokenStorage(): TokenStorage {
           /* disabled/corrupt storage — fall through to empty */
         }
       }
-      return EMPTY_TOKENS;
+      return serverTokens;
     },
     setTokens(tokens: Tokens): void {
-      if (typeof window === "undefined") return;
+      if (typeof window === "undefined") {
+        serverTokens = tokens;
+        return;
+      }
       try {
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(tokens));
       } catch {

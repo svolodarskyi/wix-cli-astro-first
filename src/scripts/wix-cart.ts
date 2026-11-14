@@ -13,10 +13,8 @@ import {
   updateLineQuantity,
 } from "../wix/storefront/cart-store";
 import type { CartLine } from "../wix/storefront/types";
-import catalog from "../data/wix-catalog.json";
 
-type Item = { id: string; name?: string; variant?: string };
-const MAP = catalog as Record<string, { productId: string; variantId: string }>;
+type Item = { id?: string; productId?: string; variantId?: string };
 const MAX_QTY = 10;
 
 const esc = (s: unknown) =>
@@ -160,7 +158,7 @@ function close() {
 }
 
 async function add(d: Item, qty = 1, from?: HTMLElement | null) {
-  const ids = MAP[d.id];
+  const ids = d.productId && d.variantId ? { productId: d.productId, variantId: d.variantId } : null;
   addError = "";
   if (!ids) {
     addError = "This item can't be added to the cart right now.";
@@ -232,15 +230,15 @@ document.addEventListener("keydown", (e) => {
 
 // Add-to-cart buttons on product cards (shop pages)
 document.addEventListener("click", (e) => {
-  const btn = (e.target as HTMLElement).closest(".add-btn") as HTMLButtonElement | null;
+  const btn = (e.target as HTMLElement).closest("button.add-btn") as HTMLButtonElement | null;
   if (!btn || btn.disabled || btn.classList.contains("is-loading")) return;
   const card = btn.closest(".product-card") as HTMLElement | null;
-  if (!card || !card.dataset.id) return;
+  if (!card || !card.dataset.productId || !card.dataset.variantId) return;
   const label = btn.textContent;
   btn.classList.add("is-loading");
   btn.setAttribute("aria-busy", "true");
   btn.textContent = "Adding…";
-  add({ id: card.dataset.id }, 1, btn)
+  add({ productId: card.dataset.productId, variantId: card.dataset.variantId }, 1, btn)
     .then(() => {
       btn.classList.add("is-added");
       btn.textContent = "Added ✓";

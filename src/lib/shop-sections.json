@@ -1,0 +1,97 @@
+{
+ "tea": [
+  {
+   "id": "sencha",
+   "title": "Sencha",
+   "sub": "Green tea",
+   "desc": "ISSA GREEN's signature \"Fukamushi sencha\" and premium \"Gyokuro\". Fresh sencha is good for everyday's immune system support.",
+   "slug": "sencha-green-tea"
+  },
+  {
+   "id": "genmaicha",
+   "title": "Genmaicha",
+   "sub": "Green tea with brown rice",
+   "desc": "ISSA GREEN's most popular tea. Blend of \"Fukamushi sencha\" and roasted brown rice. Crispy flavor is loved by people of all ages.",
+   "slug": "genmaicha"
+  },
+  {
+   "id": "matcha",
+   "title": "Matcha",
+   "sub": "Japanese ceremonial tea",
+   "desc": "Japanese super drink \"Matcha\" has been popular all over the world. Our genuine matcha has sophisticated flavor, and rich nutrition for immune system boost.",
+   "slug": "matcha"
+  },
+  {
+   "id": "houjicha",
+   "title": "Houjicha",
+   "sub": "Roasted green tea",
+   "desc": "If you are looking for a tea for your relaxing time, \"Houjicha\" is the one. Roasted aroma and low caffeine, as low as decaf, is good for after meal and evening.",
+   "slug": "houjicha"
+  },
+  {
+   "id": "other-tea",
+   "title": "Other tea",
+   "sub": "Unique Japanese tea",
+   "desc": "",
+   "slug": "other-tea"
+  },
+  {
+   "id": "gift-set",
+   "title": "Gift set",
+   "sub": "Wrapped, ready-to-go gift",
+   "desc": "",
+   "slug": "holiday-gift-sets"
+  }
+ ],
+ "ware": [
+  {
+   "id": "chasen-kazuho",
+   "title": "Chasen Kazuho",
+   "sub": "Matcha whisk",
+   "desc": "Kazuho chasen is common for daily use and tea ceremony practice.",
+   "slug": "chasen-kazuho"
+  },
+  {
+   "id": "chasen-80-prongs",
+   "title": "Chasen 80 prongs",
+   "sub": "Matcha whisk",
+   "desc": "80 prongs chasen has good balance between function and sophistication. Loved by beginners to experts.",
+   "slug": "chasen-80prongs"
+  },
+  {
+   "id": "chasen-100-prongs",
+   "title": "Chasen 100 prongs",
+   "sub": "Matcha whisk",
+   "desc": "100 prongs chasen facilitate making fine foam quickly. However, handle is bigger than other models, and requires a bit of experience. Good for enthusiastic matcha fans to experts.",
+   "slug": "chasen-100prongs"
+  },
+  {
+   "id": "chasen-shin-black-bamboo",
+   "title": "Chasen Shin Black Bamboo",
+   "sub": "Matcha whisk",
+   "desc": "This shin chasen is made from iconic black bamboo, and modest straight shape gives us minimalistic impression. Good for enthusiastic matcha fans to experts.",
+   "slug": "black-bamboo-shin"
+  },
+  {
+   "id": "resin-chasen",
+   "title": "Resin Chasen",
+   "sub": "Resin matcha whisk",
+   "desc": "This durable low-maintenance whisk is the perfect option for matcha latte.",
+   "slug": "resin-whisk"
+  },
+  {
+   "id": "chashaku",
+   "title": "Chashaku",
+   "sub": "Matcha scoop",
+   "desc": "Is chashaku just for making an atmosphere? Yes, but it is an important piece for making your tea time authentic.",
+   "slug": "chashaku"
+  },
+  {
+   "id": "chasen-stand",
+   "title": "Chasen stand",
+   "sub": "Whisk holder",
+   "desc": "",
+   "slug": "chasen-stand"
+  }
+ ]
+}

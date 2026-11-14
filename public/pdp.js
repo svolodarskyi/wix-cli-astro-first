@@ -4,7 +4,8 @@
   var D = window.PDP; if (!D) return;
   var V = D.variants, multi = V.length > 1;
   var $ = function (id) { return document.getElementById(id); };
-  var money = function (n) { return '$' + n.toFixed(2); };
+  var fmtr; try { fmtr = new Intl.NumberFormat('en-CA', { style: 'currency', currency: D.currency || 'CAD' }); } catch (e) {}
+  var money = function (n) { return fmtr ? fmtr.format(n) : '$' + n.toFixed(2); };
   var sel = null, qty = 1, MAX = (window.IssaCart && window.IssaCart.max) || 10;
   var allSold = V.every(function (v) { return v.soldout; });
   var main = $('pdp-main'), thumbs = $('pdp-thumbs');
@@ -79,7 +80,7 @@
       setTimeout(function () { add.classList.remove('is-added'); update(); }, ok ? 1400 : 0);
     }
     if (!window.IssaCart) { done(false, 'The cart is still loading. Please try again in a moment.'); return; }
-    window.IssaCart.add({ id: v.id, name: v.name }, qty, add).then(function () { done(true); }, function (e) { done(false, e && e.message); });
+    window.IssaCart.add({ id: v.id, productId: v.wix && v.wix.productId, variantId: v.wix && v.wix.variantId }, qty, add).then(function () { done(true); }, function (e) { done(false, e && e.message); });
   });
 
   /* ----- accordions (max-height) ----- */

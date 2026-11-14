@@ -1,0 +1,35 @@
+---
+// One product tile, in the design's card markup, from a live ProductSummary.
+import type { ProductSummary } from "../wix/storefront/types";
+import { fmt } from "../lib/shop";
+interface Props { p: ProductSummary; delay?: boolean }
+const { p } = Astro.props;
+const soldOut = p.availability === "OUT_OF_STOCK" && !p.preorder;
+const href = `/products/${p.slug}`;
+const range = p.price !== p.maxPrice && !p.fromPrice;
+---
+<div class="product-card reveal" data-product-id={p.id} data-variant-id={p.minPriceVariantId ?? ""} data-name={p.name}>
+  <a class="card-link" href={href} aria-label={`View details: ${p.name}`}>
+    <div class="product-img">
+      {p.imageUrl && <img src={p.imageUrl} alt={p.name} loading="lazy" />}
+      {p.hoverImageUrl && <img class="alt" src={p.hoverImageUrl} alt="" loading="lazy" />}
+    </div>
+  </a>
+  {p.ribbons.map((r, i) => <span class={i === 0 ? "product-badge" : "product-badge muted"} style={i > 0 ? `top:${12 + i * 28}px` : undefined}>{r}</span>)}
+  <p class="product-name"><a class="card-link" href={href}>{p.name}</a></p>
+  {soldOut ? (
+    <p class="product-price"><span class="oos">Out of stock</span></p>
+  ) : (
+    <>
+      <p class="product-price">
+        {p.compareAtPrice ? <><s>{fmt(p.compareAtPrice)}</s><span class="sale">{fmt(p.price)}</span></>
+          : range ? `${fmt(p.price)} – ${fmt(p.maxPrice)}`
+          : p.fromPrice ? `From ${fmt(p.price)}` : fmt(p.price)}
+      </p>
+      <p class="product-tax">Excluding GST/HST</p>
+    </>
+  )}
+  {soldOut ? <button class="add-btn" type="button" disabled>Out of stock</button>
+    : p.quickAddable && p.minPriceVariantId ? <button class="add-btn" type="button">Add to cart</button>
+    : <a class="add-btn" href={href}>Choose options</a>}
+</div>

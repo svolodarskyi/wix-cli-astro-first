@@ -1,0 +1,105 @@
+---
+// Product page — the design's PDP markup, filled from the live Wix catalog (name, price, stock,
+// options/variants, images, ribbons, description, info sections). Nothing about a product is
+// written in this file; an edit in the Wix dashboard shows on the next load.
+import SiteLayout from "../../layouts/IssaLayout.astro";
+import "../../styles/shop.css";
+import { fetchCategories, fetchProductBySlug, searchCatalog } from "../../wix/storefront/catalog";
+import { fmt } from "../../lib/shop";
+
+const slug = Astro.params.slug ?? "";
+let product = null;
+let related = [];
+let crumb = { href: "/shop-tea", label: "Tea" };
+try {
+  product = await fetchProductBySlug(slug);
+  if (product) {
+    const cats = await fetchCategories();
+    const tea = cats.find((c) => c.slug === "tea");
+    const ware = cats.find((c) => c.slug === "teaware");
+    const isWare = !!ware && product.categoryIds.includes(ware.id);
+    const parent = isWare ? ware : tea;
+    if (isWare) crumb = { href: "/tea-ware", label: "Tea ware" };
+    if (parent) {
+      const res = await searchCatalog({ categoryId: parent.id, limit: 12 });
+      related = res.products.filter((p) => p.id !== product.id).slice(0, 4);
+    }
+  }
+} catch {
+  product = null;
+}
+if (!product) return Astro.rewrite("/404");
+
+const p = product;
+const multi = p.variants.length > 1;
+const label = (v) => Object.values(v.choices).join(" / ") || v.sku || p.name;
+const num = (s) => (s ? Number(String(s).replace(/[^0-9.]/g, "")) : 0);
+const pdp = {
+  name: p.name,
+  optname: multi ? (p.options.map((o) => o.name).join(" / ") || "Option") : null,
+  currency: "CAD",
+  variants: p.variants.map((v) => ({
+    id: v.variantId,
+    label: label(v),
+    price: v.priceAmount,
+    was: num(v.compareAtPrice) || null,
+    soldout: !v.inStock && !v.preorderEnabled,
+    img: v.imageUrl || p.gallery[0] || null,
+    imgs: v.imageUrl ? [v.imageUrl, ...p.gallery.filter((g) => g !== v.imageUrl)] : p.gallery,
+    name: p.name,
+    variant: multi ? label(v) : "",
+    wix: { productId: p.id, variantId: v.variantId },
+  })),
+};
+const plain = (h) => h.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+const desc = plain(p.descriptionHtml).slice(0, 155) || `${p.name} from Issa Green`;
+const panels = [
+  ...p.infoSections.map((s) => ({ title: s.title, html: s.html })),
+  { title: "Shipping info", html: `<p><strong>Calgary</strong> Within Calgary city limit: $7 flat rate. Free delivery over $75.</p><p><strong>Rest of Canada</strong> $12 flat rate shipping by Canada Post or courier service. Free shipping over $150.</p><p>If you prefer another shipping method, please do not hesitate to contact us. We will arrange a special shipment.</p>` },
+  { title: "Return & refund policy", html: `<p><strong>Tea</strong> Due to the character of our products, we cannot accept returns or refunds of packaged tea and food.</p><p><strong>Tea ware & goods</strong> We accept returns and issue a gift card for the same amount as the purchased goods. Customers pay the postage for returns.</p><p>Please inform us about defects immediately by email at <a href="mailto:issagreentea@gmail.com">issagreentea@gmail.com</a>. We will make an exchange as soon as possible.</p>` },
+];
+const priceLine = (s) => (s.availability === "OUT_OF_STOCK" && !s.preorder ? "Out of stock" : s.price !== s.maxPrice ? `From ${fmt(s.price)}` : fmt(s.price));
+---
+
+<SiteLayout title={`${p.name} | Issa Green`} description={desc}>
+  <section class="pdp">
+    <div class="section-wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href={crumb.href}>{crumb.label}</a><span>›</span><span aria-current="page">{p.name}</span></nav>
+      <div class="pdp-grid">
+        <div class="pdp-gallery">
+          <div class="pdp-main"><img id="pdp-main" src={p.gallery[0] || p.imageUrl} alt={p.name} /></div>
+          <div class="pdp-thumbs" id="pdp-thumbs"></div>
+        </div>
+        <div class="pdp-info">
+          {p.ribbons.length > 0 && <div class="pdp-ribbons">{p.ribbons.map((r) => <span class="pdp-ribbon">{r}</span>)}</div>}
+          <h1>{p.name}</h1>
+          <div class="pdp-price" id="pdp-price" aria-live="polite"></div>
+          <div class="pdp-opt" id="pdp-opt"></div>
+          <div class="pdp-buy">
+            <div class="qty" role="group" aria-label="Quantity"><button type="button" id="q-dec" aria-label="Decrease quantity">−</button><output id="q-out" aria-live="polite">1</output><button type="button" id="q-inc" aria-label="Increase quantity">+</button></div>
+            <button class="pdp-add" id="pdp-add" type="button"></button>
+          </div>
+          <p class="pdp-msg" id="pdp-msg" role="alert" hidden></p>
+          <p class="pdp-note">Shipping and taxes calculated at checkout. <a href="/shipping">Shipping &amp; returns</a></p>
+          {p.descriptionHtml && <div class="pdp-lead" set:html={p.descriptionHtml} />}
+          <div class="acc-list">
+            {panels.map((a, i) => (
+              <div class="acc"><button class="acc-btn" type="button" aria-expanded="false" aria-controls={`acc${i}`}>{a.title}<span aria-hidden="true"></span></button><div class="acc-panel" id={`acc${i}`} role="region"><div class="acc-in" set:html={a.html} /></div></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {related.length > 0 && (
+    <section class="pdp-rel"><div class="section-wrap"><p class="section-label">{crumb.href === "/tea-ware" ? "More tea ware" : "More tea"}</p>
+      <div class="rel-grid">
+        {related.map((r) => (
+          <a class="rel-card" href={`/products/${r.slug}`}><span class="rel-img">{r.imageUrl && <img src={r.imageUrl} alt="" loading="lazy" />}</span><span class="rel-name">{r.name}</span><span class="rel-price">{priceLine(r)}</span></a>
+        ))}
+      </div>
+      <p style="text-align:center;margin-top:36px"><a class="btn-explore" href={crumb.href}>{crumb.href === "/tea-ware" ? "All tea ware" : "All tea"}</a></p></div></section>
+  )}
+  <script is:inline set:html={`window.PDP = ${JSON.stringify(pdp).replace(/</g, "\\u003c")};`} />
+  <script is:inline src="/pdp.js"></script>
+</SiteLayout>
