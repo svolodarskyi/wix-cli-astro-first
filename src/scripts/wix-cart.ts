@@ -13,7 +13,6 @@ import {
   updateLineQuantity,
 } from "../wix/storefront/cart-store";
 import type { CartLine } from "../wix/storefront/types";
-import { CA_PROVINCES, estimateDelivery, normalizePostal, type DeliveryEstimate } from "../wix/storefront/delivery";
 
 type Item = { id?: string; productId?: string; variantId?: string };
 const MAX_QTY = 10;
@@ -25,49 +24,6 @@ let lastFocus: HTMLElement | null = null;
 let checkoutState: "idle" | "redirecting" | "failed" = "idle";
 let lineError: Record<string, string> = {};
 let addError = "";
-
-// ---- delivery estimate (province + postal code → Wix picks the method from the store's rules) ----
-const DKEY = "issa-delivery-v1";
-let dAddr: { subdivision: string; postalCode: string } | null = null;
-try { dAddr = JSON.parse(localStorage.getItem(DKEY) || "null"); } catch { dAddr = null; }
-let dEst: DeliveryEstimate | null = null;
-let dErr = "";
-let dBusy = false;
-let dKey = ""; // cart signature the current estimate belongs to
-const money = (n: number) => new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD" }).format(n);
-const cartKey = () => (getCartState().cart?.lines ?? []).map((l) => `${l.lineItemId}:${l.quantity}`).join("|");
-
-async function runDelivery(addr: { subdivision: string; postalCode: string }) {
-  dBusy = true; dErr = ""; dAddr = { subdivision: addr.subdivision, postalCode: addr.postalCode }; render();
-  try {
-    dEst = await estimateDelivery(addr);
-    dAddr = { subdivision: addr.subdivision, postalCode: normalizePostal(addr.postalCode) || addr.postalCode };
-    dKey = cartKey();
-    try { localStorage.setItem(DKEY, JSON.stringify(dAddr)); } catch { /* ignore */ }
-  } catch (e) {
-    dEst = null; dErr = e instanceof Error ? e.message : String(e);
-  } finally {
-    dBusy = false; render();
-  }
-}
-function deliveryHTML(): string {
-  const sub = dAddr?.subdivision || "CA-AB";
-  const opts = CA_PROVINCES.map(([v, n]) => `<option value="${v}"${v === sub ? " selected" : ""}>${esc(n)}</option>`).join("");
-  const rows = dEst
-    ? `<div class="cart-row"><span>Delivery</span><strong>${dEst.free ? "Free" : esc(money(dEst.delivery))}</strong></div>` +
-      `<p class="cart-delivery-method">${esc(dEst.method)}</p>` +
-      (dEst.tax > 0 ? `<div class="cart-row"><span>Tax</span><strong>${esc(money(dEst.tax))}</strong></div>` : "") +
-      `<div class="cart-row total"><span>Total</span><strong>${esc(money(dEst.total))} CAD</strong></div>`
-    : "";
-  return (
-    `<form class="cart-delivery" data-delivery-form novalidate><p class="cd-title">Delivery</p>` +
-    `<div class="cd-fields"><select name="province" aria-label="Province or territory">${opts}</select>` +
-    `<input name="postal" type="text" inputmode="text" autocomplete="postal-code" placeholder="Postal code" aria-label="Postal code" value="${esc(dAddr?.postalCode || "")}" maxlength="7">` +
-    `<button type="submit" class="cd-go"${dBusy ? " disabled" : ""}>${dBusy ? "…" : dEst ? "Update" : "Estimate"}</button></div>` +
-    (dErr ? `<p class="cl-msg error" role="alert">${esc(dErr)}</p>` : "") +
-    rows + `</form>`
-  );
-}
 
 const overlay = document.createElement("div");
 overlay.className = "cart-overlay";
@@ -149,8 +105,7 @@ function render() {
   const btnLabel = checkoutState === "redirecting" ? "Redirecting to checkout…" : "Continue to secure checkout";
   foot.innerHTML =
     summary +
-    deliveryHTML() +
-    `<p class="cart-note">${dEst ? "Final delivery and tax are confirmed at checkout." : "Shipping and taxes calculated at checkout."}</p>` +
+    '<p class="cart-note">Shipping and taxes calculated at checkout.</p>' +
     `<button class="cart-btn" type="button" data-checkout${busy || blocked || checkoutState === "redirecting" ? " disabled" : ""}${checkoutState === "redirecting" ? ' aria-busy="true"' : ""}>${btnLabel}</button>` +
     '<button class="cart-btn secondary" type="button" data-continue>Continue shopping</button>' +
     (checkoutState === "failed"
@@ -233,15 +188,6 @@ async function startCheckout() {
   }
 }
 
-drawer.addEventListener("submit", (e) => {
-  const f = (e.target as HTMLElement).closest("[data-delivery-form]") as HTMLFormElement | null;
-  if (!f) return;
-  e.preventDefault();
-  const province = (f.elements.namedItem("province") as HTMLSelectElement).value;
-  const postal = (f.elements.namedItem("postal") as HTMLInputElement).value;
-  void runDelivery({ subdivision: province, postalCode: postal });
-});
-
 drawer.addEventListener("click", async (e) => {
   const t = e.target as HTMLElement;
   if (t.closest(".cart-close") || t.closest("[data-continue]")) return close();
@@ -314,10 +260,6 @@ document.body.appendChild(overlay);
 document.body.appendChild(drawer);
 findToggles();
 subscribeCart(() => {
-  // quantities/lines changed → refresh the delivery estimate for a saved address
-  const k = cartKey();
-  if (dAddr && !dBusy && k && k !== dKey && getCartState().cart?.lines.length) void runDelivery(dAddr);
-  else if (!k) { dEst = null; dKey = ""; }
   render();
   if (getCartState().open && !drawer.classList.contains("open")) open();
 });
