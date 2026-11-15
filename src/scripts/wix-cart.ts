@@ -13,6 +13,7 @@ import {
   updateLineQuantity,
 } from "../wix/storefront/cart-store";
 import type { CartLine } from "../wix/storefront/types";
+import { legacyCheckoutOn, legacyCheckoutUrl } from "../wix/storefront/legacy-checkout";
 
 type Item = { id?: string; productId?: string; variantId?: string };
 const MAX_QTY = 10;
@@ -181,6 +182,11 @@ async function startCheckout() {
   checkoutState = "redirecting";
   render();
   try {
+    if (legacyCheckoutOn()) {
+      // TEST switch (?checkout=legacy): hosted checkout built from Checkout V1 instead of the Cart V2 id.
+      window.location.href = await legacyCheckoutUrl();
+      return;
+    }
     await goToCheckout();
   } catch {
     checkoutState = "failed";
@@ -289,4 +295,5 @@ window.addEventListener("pageshow", (e) => {
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") resetAfterCheckout();
 });
+legacyCheckoutOn();
 if (new URLSearchParams(location.search).get("cart") === "open") open();
